@@ -23,7 +23,12 @@ app.use(limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:3000',
+    'https://sachify-2.vercel.app',
+    'https://sachify-2-git-main-aryamankhandelwal.vercel.app',
+    'https://sachify-2-aryamankhandelwal.vercel.app'
+  ],
   credentials: true
 }));
 
