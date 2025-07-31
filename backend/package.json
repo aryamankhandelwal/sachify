@@ -1,0 +1,30 @@
+{
+  "name": "sachify-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Sachify notes app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "setup": "node scripts/setup.js",
+    "test": "node scripts/test-api.js",
+    "test-api": "node scripts/test-api.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "sequelize": "^6.32.1",
+    "helmet": "^7.0.0",
+    "express-rate-limit": "^6.10.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "axios": "^1.5.0"
+  },
+  "keywords": ["notes", "api", "express", "mongodb"],
+  "author": "Sachify Team",
+  "license": "MIT"
+} 
