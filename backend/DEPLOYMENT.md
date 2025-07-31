@@ -5,7 +5,7 @@ This guide will help you deploy your Sachify backend to Render.
 ## 📋 Prerequisites
 
 1. **Render Account**: Sign up at [render.com](https://render.com)
-2. **MongoDB Database**: Set up a MongoDB instance (MongoDB Atlas recommended)
+2. **PostgreSQL Database**: Set up a PostgreSQL instance (Render PostgreSQL recommended)
 3. **Git Repository**: Your code should be in a Git repository
 
 ## 🛠️ Step-by-Step Deployment
@@ -23,16 +23,16 @@ backend/
 └── scripts/
 ```
 
-### 2. Set Up MongoDB
+### 2. Set Up PostgreSQL
 
-1. **Create MongoDB Atlas Account** (recommended)
-   - Go to [mongodb.com/cloud/atlas](https://mongodb.com/cloud/atlas)
-   - Create a free cluster
+1. **Create Render PostgreSQL Database** (recommended)
+   - Go to [dashboard.render.com](https://dashboard.render.com)
+   - Create a new PostgreSQL database
    - Get your connection string
 
-2. **Or Use Local MongoDB** (for development)
-   - Install MongoDB locally
-   - Use connection string: `mongodb://localhost:27017/sachify`
+2. **Or Use Local PostgreSQL** (for development)
+   - Install PostgreSQL locally
+   - Use connection string: `postgresql://localhost:5432/sachify`
 
 ### 3. Deploy to Render
 
@@ -55,7 +55,7 @@ backend/
    Click "Environment" tab and add:
    ```
    NODE_ENV=production
-   MONGODB_URI=your_mongodb_connection_string
+   DATABASE_URL=your_postgresql_connection_string
    FRONTEND_URL=your_frontend_url
    PORT=10000
    ```
@@ -81,7 +81,7 @@ backend/
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
 | `NODE_ENV` | Yes | Environment mode | `production` |
-| `MONGODB_URI` | Yes | MongoDB connection string | `mongodb+srv://user:pass@cluster.mongodb.net/sachify` |
+| `DATABASE_URL` | Yes | PostgreSQL connection string | `postgresql://user:password@host:port/database` |
 | `FRONTEND_URL` | No | Frontend URL for CORS | `https://your-frontend.onrender.com` |
 | `PORT` | No | Server port (Render sets this) | `10000` |
 
@@ -123,8 +123,8 @@ Render automatically deploys when you push to your main branch:
    - Check build logs in Render dashboard
 
 2. **Database Connection Fails**
-   - Verify `MONGODB_URI` is correct
-   - Check MongoDB network access
+   - Verify `DATABASE_URL` is correct
+   - Check PostgreSQL network access
    - Ensure database exists
 
 3. **CORS Errors**
@@ -143,7 +143,7 @@ echo $MONGODB_URI
 echo $NODE_ENV
 
 # Test database connection
-node -e "require('mongoose').connect(process.env.MONGODB_URI).then(() => console.log('Connected')).catch(console.error)"
+node -e "const { Sequelize } = require('sequelize'); new Sequelize(process.env.DATABASE_URL).authenticate().then(() => console.log('Connected')).catch(console.error)"
 ```
 
 ## 📈 Scaling
