@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgresql://personalwebsite_db_xt93_user:suoUo9x2Ynzg83U0xwtsKPyA4Wrgblz9@dpg-d208kp15pdvs73c8go60-a.oregon-postgres.render.com/personalwebsite_db_xt93', {
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgresql://localhost:5432/sachify', {
   dialect: 'postgres',
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
   pool: {
